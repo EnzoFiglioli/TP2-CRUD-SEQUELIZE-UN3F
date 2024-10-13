@@ -1,5 +1,11 @@
 process.loadEnvFile();
-const mysql = require('mysql2');
+const {Sequelize} = require("sequelize");
 
-const {DBUSER,} = process.env;
+const {DATABASE, DBUSER, PASSWORD, HOST} = process.env;
 
+const sequelize = new Sequelize(DATABASE,DBUSER,PASSWORD,{
+    host:HOST,
+    dialect:'mysql'
+});
+
+module.exports = {sequelize}
