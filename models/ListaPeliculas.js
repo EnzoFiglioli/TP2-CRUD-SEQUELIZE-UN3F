@@ -25,6 +25,10 @@ const ListaPeliculas = sequelize.define('ListaPeliculas',{
             key: 'id_pelicula'
         }
     }
+},
+{
+    tableName:'ListaPeliculas',
+    timestamps:false
 });
 
 module.exports = {ListaPeliculas};

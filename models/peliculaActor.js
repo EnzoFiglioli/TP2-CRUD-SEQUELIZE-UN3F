@@ -20,6 +20,9 @@ const PeliculaActor = sequelize.define('Pelicula_Actor',{
             key: 'id_actor'
         }
     }
+},{
+    tableName:'Pelicula_Actor',
+    timestamps: false
 });
 
 module.exports = {PeliculaActor};

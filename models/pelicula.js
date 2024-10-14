@@ -29,14 +29,17 @@ const Pelicula = sequelize.define('Pelicula',{
         type: DataTypes.CHAR(255),
         allowNull: false
     },
-    temporadas:{
+    duracion:{
         type: DataTypes.INTEGER,
-        defaultValue: 1
+        defaultValue: 60
     },
     trailer: {
         type: DataTypes.CHAR(255),
         allowNull: false
     }
+},{
+    tableName:'Pelicula',
+    timestamps: true
 });
 
 module.exports = {Pelicula}

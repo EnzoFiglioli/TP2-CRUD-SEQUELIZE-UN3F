@@ -33,6 +33,10 @@ const Busqueda = sequelize.define('Busqueda',{
             key: 'id_actor'
         }
     }
+},
+{
+    tableName:'Busqueda',
+    timestamps:false
 });
 
 module.exports = Busqueda;

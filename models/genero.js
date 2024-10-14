@@ -9,6 +9,10 @@ const Genero = sequelize.define('Genero',{
         unique: true,
         primaryKey: true
     }
+},
+{
+    tableName:'Genero',
+    timestamps:false
 })
 
 module.exports = Genero;

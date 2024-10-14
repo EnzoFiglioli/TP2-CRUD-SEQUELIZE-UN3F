@@ -25,6 +25,10 @@ const peliculaGenero = sequelize.define("Pelicula_Genero",{
         defaultValue: false,
         allowNull: false
     }
+},
+{
+    tableName:'Pelicula_Genero',
+    timestamps:false
 });
 
 module.exports = {peliculaGenero};

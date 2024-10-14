@@ -18,6 +18,9 @@ const Actor = sequelize.define('Actor',{
         type: DataTypes.CHAR(50),
         allowNull: false
     }
+},{
+    tableName:'Actor',
+    timestamps:false
 })
 
 module.exports = Actor;
