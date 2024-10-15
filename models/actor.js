@@ -23,4 +23,4 @@ const Actor = sequelize.define('Actor',{
     timestamps:false
 })
 
-module.exports = Actor;
+module.exports = {Actor};

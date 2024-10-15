@@ -1,0 +1,8 @@
+### todas las peliculas y series
+GET http://localhost:8080/contenidos
+
+### Filtrar por categorias
+GET http://localhost:8080/categoria
+
+### Series
+GET http://localhost:8080/serie

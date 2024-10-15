@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize');
 const {sequelize} = require('../conexion/database.js');
 
-const Pelicula = sequelize.define('Pelicula',{
+const Peliculas = sequelize.define('Peliculas',{
     id_pelicula: {
         type: DataTypes.INTEGER,
         primaryKey:true,
@@ -38,8 +38,8 @@ const Pelicula = sequelize.define('Pelicula',{
         allowNull: false
     }
 },{
-    tableName:'Pelicula',
+    tableName:'Peliculas',
     timestamps: true
 });
 
-module.exports = {Pelicula}
+module.exports = {Peliculas}

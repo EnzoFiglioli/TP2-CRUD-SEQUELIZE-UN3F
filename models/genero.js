@@ -8,6 +8,10 @@ const Genero = sequelize.define('Genero',{
         allowNull: true,
         unique: true,
         primaryKey: true
+    },
+    nombre_genero: {
+        type:DataTypes.CHAR(20),
+        allowNull:false
     }
 },
 {
@@ -15,4 +19,4 @@ const Genero = sequelize.define('Genero',{
     timestamps:false
 })
 
-module.exports = Genero;
+module.exports = {Genero};

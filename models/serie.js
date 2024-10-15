@@ -1,7 +1,7 @@
-const { sequelize } = require('sequelize');
+const { sequelize } = require('../conexion/database.js');
 const { DataTypes } = require('sequelize');
 
-const Serie = sequelize.define('Serie', {
+const Series = sequelize.define('Series', {
     id_serie: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -17,12 +17,20 @@ const Serie = sequelize.define('Serie', {
         type: DataTypes.STRING(150),
         allowNull: false
     },
+    genero: {
+        type:DataTypes.INTEGER,
+        defaultValue: 4,
+        references:{
+            model:'Genero',
+            key: 'id_genero'
+        }
+    },
     categoria: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Categoria', // Nombre de la tabla relacionada
-            key: 'id_categoria' // Llave foránea
+            model: 'Categoria',
+            key: 'id_categoria'
         }
     },
     resumen: {
@@ -42,4 +50,4 @@ const Serie = sequelize.define('Serie', {
     tableName: 'Series'
 });
 
-module.exports = Serie;
+module.exports = {Series};
