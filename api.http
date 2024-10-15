@@ -25,3 +25,10 @@ Content-Type:application/json
 
 ### Eliminar contenidos
 DELETE http://localhost:8080/contenidos/5
+
+### Actualizar de contenidos parcial o completa
+PATCH http://localhost:8080/contenidos/update/2
+Content-Type: application/json
+{
+    "duracion":"120 minutos"
+}

@@ -12,14 +12,14 @@ const GeneroContenido = sequelize.define('GeneroContenido', {
     id_contenido: {
         type: DataTypes.INTEGER,
         references: {
-            model: 'Contenido', 
+            model: Contenido, 
             key: 'id_contenido',
         }
     },
     id_genero: {
         type: DataTypes.INTEGER,
         references: {
-            model: 'Genero',
+            model: Genero,
             key: 'id_genero',
         }
     },
@@ -28,7 +28,9 @@ const GeneroContenido = sequelize.define('GeneroContenido', {
     timestamps: false,
 });
 
-Contenido.belongsToMany(Genero, {through: GeneroContenido, foreignKey: 'id_contenido',otherKey: 'id_genero'});
-Genero.belongsToMany(Contenido, {through: GeneroContenido,foreignKey: 'id_genero',otherKey:'id_contenido'});
+Contenido.hasMany(GeneroContenido, { foreignKey: 'id_contenido' });
+GeneroContenido.belongsTo(Contenido, { foreignKey: 'id_contenido' });
+GeneroContenido.belongsTo(Genero, { foreignKey: 'id_genero' }); 
+Genero.hasMany(GeneroContenido, { foreignKey: 'id_genero' });
 
 module.exports = { GeneroContenido };

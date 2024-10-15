@@ -3,6 +3,8 @@ const { Genero } = require("../models/genero");
 const { Actor } = require("../models/actor");
 const { ContenidoActor } = require("../models/contenidoActores");
 const { Op } = require("sequelize");
+const {GeneroContenido} = require("../models/generosContenido");
+const {transformarContenido} = require("../middlewares/transformarContenido");
 
 // Filtrar contenido
 const filtrarContenido = async (req, res) => {
@@ -11,6 +13,13 @@ const filtrarContenido = async (req, res) => {
 
         const filterOptions = {
             include: [
+                {
+                    model: GeneroContenido,
+                    include: {
+                        model: Genero,
+                        attributes: ['nombre_genero']
+                    }
+                },
                 {
                     model: Genero,
                     where: genero ? { nombre_genero: { [Op.eq]: genero } } : undefined,
@@ -34,21 +43,9 @@ const filtrarContenido = async (req, res) => {
         }
 
         const contenidos = await Contenido.findAll(filterOptions);
-        const resultados = contenidos.map(contenido => ({
-            id_contenido: contenido.id_contenido,
-            poster: contenido.poster,
-            titulo: contenido.titulo,
-            categoria: contenido.categoria,
-            genero: contenido.genero,
-            resumen: contenido.resumen,
-            temporadas: contenido.temporadas,
-            duracion: contenido.duracion,
-            trailer: contenido.trailer,
-            genero: contenido.Genero.nombre_genero,
-            actores: contenido.ContenidoActors.map(contenidoActor => contenidoActor.Actor.nombre_actor) 
-        }));
+        const resultado = contenidos.map(transformarContenido);
         if (resultados.length > 0) {
-            return res.json(resultados); 
+            return res.json(resultado); 
         } else {
             return res.status(404).json({ msg: 'No se encontraron resultados con esos filtros.' });
         }
@@ -62,6 +59,13 @@ const obtenerContenidos = async (req, res) => {
     try {
         const contenidos = await Contenido.findAll({
             include: [
+                {
+                    model: GeneroContenido,
+                    include: {
+                        model: Genero,
+                        attributes: ['nombre_genero']
+                    }
+                },
                 { model: Genero, attributes: ['nombre_genero'] },
                 { 
                     model: ContenidoActor, 
@@ -74,22 +78,9 @@ const obtenerContenidos = async (req, res) => {
         });
 
         // Da una respuesta mas amigable al array de actores
-        const resultados = contenidos.map(contenido => ({
-            id_contenido: contenido.id_contenido,
-            poster: contenido.poster,
-            titulo: contenido.titulo,
-            categoria: contenido.categoria,
-            genero: contenido.genero,
-            resumen: contenido.resumen,
-            temporadas: contenido.temporadas,
-            duracion: contenido.duracion,
-            trailer: contenido.trailer,
-            genero: contenido.Genero.nombre_genero,
-            actores: contenido.ContenidoActors.map(contenidoActor => contenidoActor.Actor.nombre_actor) 
-        }));
-
+        const resultado = contenidos.map(transformarContenido);
         // Responder con los contenidos transformados
-        res.json(resultados);
+        res.json(resultado);
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener los contenidos.' });
     }
@@ -116,8 +107,8 @@ const obtenerPorId = async (req, res) => {
         if (!contenido) {
             return res.status(404).json({ error: 'Contenido no encontrado.' });
         }
-
-        res.json(contenido);
+        const resultado = contenidos.map(transformarContenido);
+        res.json(resultado);
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener el contenido.' });
     }
@@ -172,4 +163,25 @@ const agregarPelicula = async (req, res) => {
     }
 }
 
-module.exports = { obtenerContenidos, obtenerPorId, filtrarContenido, eliminarContenido, agregarPelicula};
+// Actualizacion de contenidos
+const actualizarContenido = async (req, res) => {
+    try {
+        const { id } = req.params; 
+        const datosActualizados = req.body;
+
+        const contenido = await Contenido.findByPk(id);
+        
+        if (!contenido) {
+            return res.status(404).json({ msg: 'Contenido no encontrado.' });
+        }
+
+        await contenido.update(datosActualizados);
+
+        res.status(200).json({ msg: 'Contenido actualizado correctamente.', contenido });
+    } catch (error) {
+        res.status(500).json({ msg: 'Error al actualizar el contenido.', error: error.message });
+    }
+};
+
+
+module.exports = { obtenerContenidos, obtenerPorId, filtrarContenido, eliminarContenido, agregarPelicula, actualizarContenido};
