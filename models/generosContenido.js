@@ -29,7 +29,6 @@ const GeneroContenido = sequelize.define('GeneroContenido', {
 });
 
 Contenido.belongsToMany(Genero, {through: GeneroContenido, foreignKey: 'id_contenido',otherKey: 'id_genero'});
-
 Genero.belongsToMany(Contenido, {through: GeneroContenido,foreignKey: 'id_genero',otherKey:'id_contenido'});
 
 module.exports = { GeneroContenido };

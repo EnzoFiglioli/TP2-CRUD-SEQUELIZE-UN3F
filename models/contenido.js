@@ -25,8 +25,8 @@ const Contenido = sequelize.define('Contenido', {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
-            model: Genero,  // Referencia al modelo Genero
-            key: 'id_genero'  // Clave primaria en la tabla de géneros
+            model: Genero,  
+            key: 'id_genero'  
         }
     },
     resumen: {
@@ -55,6 +55,5 @@ const Contenido = sequelize.define('Contenido', {
     timestamps: false
 });
 
-// Relación de Contenido con Genero
 Contenido.belongsTo(Genero, { foreignKey: 'genero' });
 module.exports = { Contenido };

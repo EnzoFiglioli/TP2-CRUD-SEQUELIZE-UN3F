@@ -1,23 +1,27 @@
-### todas las peliculas y series
+### Todas las peliculas y series
 GET http://localhost:8080/contenidos
 
-### Filtrar por id
+### Filtrar contenido por id
 GET http://localhost:8080/contenidos/1
 
-## Filtrar por categoria
-GET http://localhost:8080/contenidos/peliculas/
+## Filtrar contenido por categoria
+GET http://localhost:8080/contenidos/
 
-### Filtrar por titulo, genero o 
+### Filtrar contenido por titulo, genero o categoria 
 GET http://localhost:8080/contenidos/q?genero=1
 
 ### Agregar pelicula
-POST http://localhost:8080/peliculas/
+POST http://localhost:8080/contenidos/
 Content-Type:application/json
 {
     "titulo":"Guasón",
     "poster":"./posters/7.jpg",
-    "categoria":2,
+    "categoria":"Pelicula",
+    "genero":9,
     "resumen":"Arthur Fleck (Phoenix) es un hombre ignorado por la sociedad, cuya motivación en la vida es hacer reír. Pero una Serie de trágicos acontecimientos le llevarán a ver el mundo de otra forma. Película basada en el popular personaje de DC Comics Joker, conocido como archivillano de Batman, pero que en este film tomará un cariz más realista y oscuro.", 
     "duracion":97, 
     "trailer":"https://www.youtube.com/embed/zAGVQLHvwOY"
 } 
+
+### Eliminar contenidos
+DELETE http://localhost:8080/contenidos/5
