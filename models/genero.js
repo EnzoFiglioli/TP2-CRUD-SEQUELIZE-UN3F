@@ -1,5 +1,5 @@
 const {DataTypes} = require('sequelize');
-const {sequelize} = require('../conexion/database.js');
+const {sequelize} = require('../config/database.js');
 
 const Genero = sequelize.define('Genero',{
     id_genero:{

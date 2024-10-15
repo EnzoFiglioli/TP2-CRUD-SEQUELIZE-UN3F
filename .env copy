@@ -1,0 +1,5 @@
+PORT = {TU_PUERTO}
+PASSWORD = {TU_PASSWORD}
+DATABASE = trailerflix
+DBUSER = {TU_USER}
+HOST = localhost

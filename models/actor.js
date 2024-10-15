@@ -1,26 +1,20 @@
-// Model for Actor
-const {DataTypes} = require('sequelize');
-const {sequelize} = require('../conexion/database.js');
+const { DataTypes } = require('sequelize');
+const {sequelize} = require('../config/database.js');
 
-const Actor = sequelize.define('Actor',{
-    id_actor:{
+const Actor = sequelize.define('Actor', {
+    id_actor: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         autoIncrement: true,
+    },
+        nombre_actor: {
+        type: DataTypes.STRING,
         allowNull: false,
-        primaryKey:true,
-        unique:true
     },
-    nombre: {
-        type: DataTypes.CHAR(50),
-        allowNull: false
-    },
-    apellido: {
-        type: DataTypes.CHAR(50),
-        allowNull: false
-    }
-},{
-    tableName:'Actor',
-    timestamps:false
-})
+    }, 
+    {
+    tableName: 'actores',
+    timestamps: false,
+});
 
 module.exports = {Actor};
