@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const {sequelize} = require('../config/database.js');
+const { sequelize } = require('../config/database.js');
 
 const Actor = sequelize.define('Actor', {
     id_actor: {
@@ -7,14 +7,13 @@ const Actor = sequelize.define('Actor', {
         primaryKey: true,
         autoIncrement: true,
     },
-        nombre_actor: {
+    nombre_actor: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
-    }, 
-    {
+    }
+}, {
     tableName: 'actores',
     timestamps: false,
 });
 
-module.exports = {Actor};
+module.exports = { Actor };

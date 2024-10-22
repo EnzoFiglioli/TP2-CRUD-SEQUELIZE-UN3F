@@ -1,22 +1,19 @@
-const {DataTypes} = require('sequelize');
-const {sequelize} = require('../config/database.js');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/database.js');
 
-const Genero = sequelize.define('Genero',{
-    id_genero:{
+const Genero = sequelize.define('Genero', {
+    id_genero: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         autoIncrement: true,
-        allowNull: true,
-        unique: true,
-        primaryKey: true
     },
     nombre_genero: {
-        type:DataTypes.CHAR(20),
-        allowNull:false
+        type: DataTypes.STRING,
+        allowNull: false,
     }
-},
-{
-    tableName:'Genero',
-    timestamps:false
-})
+}, {
+    tableName: 'genero',
+    timestamps: false
+});
 
-module.exports = {Genero};
+module.exports = { Genero };

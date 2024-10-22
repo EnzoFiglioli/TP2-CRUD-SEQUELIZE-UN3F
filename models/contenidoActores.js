@@ -1,17 +1,16 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
-const { Contenido } = require('./contenido');
-const { Actor } = require('./actor');
+const { sequelize } = require('../config/database.js');
+const { Contenido } = require('./contenido.js');
+const { Actor } = require('./actor.js');
 
-const ContenidoActor = sequelize.define('ContenidoActor', {
-    id_contenido_actor: {
+const ContenidoActores = sequelize.define('ContenidoActores', {
+    id_reparto: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
     id_contenido: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         references: {
             model: Contenido,
             key: 'id_contenido'
@@ -30,10 +29,7 @@ const ContenidoActor = sequelize.define('ContenidoActor', {
     timestamps: false,
 });
 
-// Definición de relaciones
-Contenido.hasMany(ContenidoActor, { foreignKey: 'id_contenido' });
-ContenidoActor.belongsTo(Contenido, { foreignKey: 'id_contenido' });
-ContenidoActor.belongsTo(Actor, { foreignKey: 'id_actor' }); 
-Actor.hasMany(ContenidoActor, { foreignKey: 'id_contenido' });
+Contenido.belongsToMany(Actor, { through: ContenidoActores, foreignKey: 'id_contenido' });
+Actor.belongsToMany(Contenido, { through: ContenidoActores, foreignKey: 'id_actor' });
 
-module.exports = { ContenidoActor };
+module.exports = { ContenidoActores };

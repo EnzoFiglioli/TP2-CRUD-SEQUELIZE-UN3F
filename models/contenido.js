@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
-const { sequelize } = require("../config/database");
-const { Genero } = require("./genero");
+const { sequelize } = require("../config/database.js");
+const { Genero } = require("./genero.js");
+const { Categoria } = require("./categoria.js");
 
 const Contenido = sequelize.define('Contenido', {
     id_contenido: {
@@ -17,9 +18,11 @@ const Contenido = sequelize.define('Contenido', {
         allowNull: false,
     },
     categoria: {
-        type: DataTypes.ENUM('Pelicula', 'Serie'), 
-        allowNull: false,
-        defaultValue: 'Pelicula', 
+        type: DataTypes.INTEGER,
+        references: {
+            model: Categoria,
+            key: 'id_categoria'
+        }
     },
     genero: {
         type: DataTypes.INTEGER,
@@ -41,19 +44,24 @@ const Contenido = sequelize.define('Contenido', {
         }
     },
     duracion: {
-        type: DataTypes.STRING,
-        allowNull: true, 
+        type: DataTypes.STRING
     },
     trailer: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
+    }
 }, {
     sequelize,
     modelName: 'Contenido',
-    tableName: 'contenidos',
-    timestamps: false
+    tableName: 'contenido',
+    timestamps: true
 });
 
+// Relaciones
+Contenido.belongsTo(Categoria, { foreignKey: 'categoria' });
+Categoria.hasMany(Contenido, { foreignKey: 'categoria' });
+
 Contenido.belongsTo(Genero, { foreignKey: 'genero' });
+Genero.hasMany(Contenido, { foreignKey: 'genero' });
+
 module.exports = { Contenido };
