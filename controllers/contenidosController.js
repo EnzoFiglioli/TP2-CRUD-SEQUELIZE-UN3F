@@ -4,6 +4,7 @@ const { Actor } = require("../models/actor");
 const { ContenidoActores } = require("../models/contenidoActores");
 const { Categoria } = require("../models/categoria.js")
 const { Op } = require("sequelize");
+const {formateadorResponse} = require("../middlewares/formateador.js")
 
 // Filtrar contenido
 const filtrarContenido = async (req, res) => {
@@ -37,7 +38,7 @@ const filtrarContenido = async (req, res) => {
     const contenidos = await Contenido.findAll(filterOptions);
 
     if (contenidos.length > 0) {
-        return res.json(contenidos); 
+        return res.json(formateadorResponse(contenidos)); 
     } else {
         return res.status(404).json({ msg: 'No se encontraron resultados con esos filtros.' });
     }
@@ -50,6 +51,7 @@ const filtrarContenido = async (req, res) => {
 const obtenerContenidos = async (req, res) => {
     try {
         const contenidos = await Contenido.findAll({
+            attributes:['id_contenido','titulo','resumen','temporadas','duracion','trailer'],
             include: [
                 {
                     model: Categoria,
@@ -62,12 +64,15 @@ const obtenerContenidos = async (req, res) => {
                 {
                     model: Actor,
                     through:{
-                        model: ContenidoActores
-                    }
+                        model: ContenidoActores,
+                        attributes:[]
+                    },
+                    attributes:['nombre_actor'],
+                    as:['actor']
                 }
             ]
     });
-    res.json(contenidos);
+    res.json(formateadorResponse(contenidos));
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener los contenidos.' });
     }
@@ -79,21 +84,31 @@ const obtenerPorId = async (req, res) => {
         const id = req.params.id;
         if(!id || id < 1) return res.status(400).json({msg:'El id es invalido'});
         const contenido = await Contenido.findByPk(id, {
+            attributes:['id_contenido','titulo','resumen','temporadas','duracion','trailer'],
             include: [
-                { model: Genero, attributes: ['nombre_genero'] },
-                { 
-                    model:Actor,
+                {
+                    model: Categoria,
+                    attributes: ['nombre_categoria']
+                },
+                {
+                    model: Genero,
+                    attributes: ['nombre_genero']
+                },
+                {
+                    model: Actor,
                     through:{
-                        model: ContenidoActores
-                    }
+                        model: ContenidoActores,
+                        attributes:[]
+                    },
+                    attributes:['nombre_actor']
                 }
-            ],
+            ]
         });
 
         if (!contenido) {
             return res.status(404).json({ error: 'Contenido no encontrado.' });
         }
-        res.json(contenido);
+        res.json(formateadorResponse(contenido));
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener el contenido.' });
     }
@@ -115,39 +130,39 @@ const eliminarContenido = async(req,res)=>{
 }
 
 // Agregar película
-// const agregarPelicula = async (req, res) => {
-//     try {
-//         const {
-//             id_contenido,
-//             titulo,
-//             poster,
-//             categoria,
-//             genero,
-//             resumen,
-//             duracion,
-//             trailer
-//         } = req.body;
+const agregarPelicula = async (req, res) => {
+    try {
+        const {
+            titulo,
+            poster,
+            categoria,
+            genero,
+            resumen,
+            temporadas,
+            duracion,
+            trailer
+        } = req.body;
 
-//         // Asegúrate de que todos los campos necesarios están presentes
-//         if (!titulo || !poster || !categoria || !genero || !resumen || !duracion || !trailer) {
-//             return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
-//         }
+        // Asegúrate de que todos los campos necesarios están presentes
+        if (!titulo || !poster || !categoria || !genero || !resumen || !duracion || !trailer || !temporadas) {
+            return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
+        }
 
-//         const contenidoNuevo = await Contenido.create({
-//             id_contenido,
-//             titulo,
-//             poster,
-//             categoria,
-//             genero,
-//             resumen,
-//             duracion,
-//             trailer
-//         });
-//         res.status(201).json(contenidoNuevo);
-//     } catch (error) {
-//         res.status(500).json({ error: `Ocurrió un error`, message: `error: ${error.message}` });
-//     }
-// }
+        const contenidoNuevo = await Contenido.create({
+            titulo,
+            poster,
+            categoria,
+            genero,
+            resumen,
+            temporadas,
+            duracion,
+            trailer
+        });
+        res.status(201).json(contenidoNuevo);
+    } catch (error) {
+        res.status(500).json({ error: `Ocurrió un error`, message: `error: ${error.message}` });
+    }
+}
 
 // Actualizacion de contenidos
 // const actualizarContenido = async (req, res) => {
@@ -175,6 +190,6 @@ module.exports = {
     obtenerPorId, 
     filtrarContenido, 
     // eliminarContenido, 
-    // agregarPelicula,
+    agregarPelicula,
     // actualizarContenido
 };

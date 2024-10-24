@@ -5,7 +5,7 @@ const {
             obtenerPorId, 
             filtrarContenido, 
             // eliminarContenido, 
-            // agregarPelicula, 
+            agregarPelicula, 
             // actualizarContenido
         } = require('../controllers/contenidosController.js');
 
@@ -13,7 +13,7 @@ router.get('/', obtenerContenidos);
 router.get("/query",filtrarContenido);
 router.get('/:id', obtenerPorId);
 // router.delete('/:id',eliminarContenido);
-// router.post('/',agregarPelicula);
+router.post('/',agregarPelicula);
 // router.patch("/update/:id",actualizarContenido);
 
 module.exports = router;
