@@ -11,4 +11,18 @@ function formateadorResponse(data){
     });
 }
 
-module.exports = {formateadorResponse}
+function formateadorObjeto(data) {
+    if (typeof data === 'object' && !Array.isArray(data)) {
+        return {
+            id_contenido: data.id_contenido,
+            titulo: data.titulo,
+            resumen: data.resumen,
+            categoria: data.Categorium.nombre_categoria,
+            genero: data.Genero.nombre_genero,
+            actores: data.Actors.map((actor) => actor.nombre_actor),
+        };
+    }
+    return null;
+}
+
+module.exports = { formateadorResponse, formateadorObjeto };

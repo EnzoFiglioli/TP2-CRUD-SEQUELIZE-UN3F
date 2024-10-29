@@ -4,7 +4,9 @@ const {
     obtenerContenidos, 
     obtenerPorId, 
     filtrarContenido, 
-    agregarPelicula,
+    agregarContenido,
+    eliminarContenido,
+    // actualizarContenido,
 } = require('../controllers/contenidosController.js');
 
 /**
@@ -72,8 +74,8 @@ router.get('/:id', obtenerPorId);
  * @swagger
  * /contenidos:
  *   post:
- *     summary: Agregar una nueva película
- *     description: Endpoint para agregar una nueva película al sistema.
+ *     summary: Agregar una nueva película o serie
+ *     description: Endpoint para agregar un nuevo contenido al sistema.
  *     requestBody:
  *       required: true
  *       content:
@@ -82,10 +84,30 @@ router.get('/:id', obtenerPorId);
  *             $ref: '#/components/schemas/Contenido'
  *     responses:
  *       201:
- *         description: Película agregada exitosamente.
+ *         description: Contenido agregado exitosamente.
  *       400:
  *         description: Error en la solicitud.
  */
-router.post('/', agregarPelicula);
-
+router.post('/', agregarContenido);
+/**
+ * @swagger
+ * /contenidos/eliminar/{id}:
+ *   delete:
+ *     summary: eliminar un contenido
+ *     description: Endpoint para eliminar un contenido de nuestra base de datos.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID del contenido
+ *     responses:
+ *       201:
+ *         description: Contenido eliminado exitosamente.
+ *       400:
+ *         description: Error en la solicitud.
+ */
+router.delete('/eliminar/:id',eliminarContenido);
+// router.patch('/actualizar/:id')
 module.exports = router;

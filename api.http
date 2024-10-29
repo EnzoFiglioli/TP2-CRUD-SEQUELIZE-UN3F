@@ -19,12 +19,12 @@ Content-Type:application/json
     "categoria":1,
     "genero":3,
     "resumen":"Arthur Fleck (Phoenix) es un hombre ignorado por la sociedad, cuya motivación en la vida es hacer reír. Pero una Serie de trágicos acontecimientos le llevarán a ver el mundo de otra forma. Película basada en el popular personaje de DC Comics Joker, conocido como archivillano de Batman, pero que en este film tomará un cariz más realista y oscuro.", 
-    "duracion":121, 
+    "duracion":121,
     "trailer":"https://www.youtube.com/embed/zAGVQLHvwOY"
 } 
 
 ### Eliminar contenidos
-DELETE http://localhost:8080/contenidos/5
+DELETE http://localhost:8080/contenidos/eliminar/5
 
 ### Actualizar de contenidos parcial o completa
 PATCH http://localhost:8080/contenidos/update/2

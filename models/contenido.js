@@ -44,7 +44,8 @@ const Contenido = sequelize.define('Contenido', {
         }
     },
     duracion: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: true
     },
     trailer: {
         type: DataTypes.STRING,

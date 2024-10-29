@@ -4,7 +4,7 @@ const { Actor } = require("../models/actor");
 const { ContenidoActores } = require("../models/contenidoActores");
 const { Categoria } = require("../models/categoria.js")
 const { Op } = require("sequelize");
-const {formateadorResponse} = require("../middlewares/formateador.js")
+const {formateadorResponse, formateadorObjeto} = require("../middlewares/formateador.js")
 
 // Filtrar contenido
 const filtrarContenido = async (req, res) => {
@@ -81,10 +81,11 @@ const obtenerContenidos = async (req, res) => {
 // Obtener contenido por ID
 const obtenerPorId = async (req, res) => {
     try {
-        const id = req.params.id;
-        if(!id || id < 1) return res.status(400).json({msg:'El id es invalido'});
+        const id = parseInt(req.params.id);
+        if (!id || id < 1) return res.status(400).json({ msg: 'El id es inválido' });
+
         const contenido = await Contenido.findByPk(id, {
-            attributes:['id_contenido','titulo','resumen','temporadas','duracion','trailer'],
+            attributes: ['id_contenido', 'titulo', 'resumen', 'temporadas', 'duracion', 'trailer'],
             include: [
                 {
                     model: Categoria,
@@ -96,11 +97,11 @@ const obtenerPorId = async (req, res) => {
                 },
                 {
                     model: Actor,
-                    through:{
+                    through: {
                         model: ContenidoActores,
-                        attributes:[]
+                        attributes: []
                     },
-                    attributes:['nombre_actor']
+                    attributes: ['nombre_actor']
                 }
             ]
         });
@@ -108,9 +109,10 @@ const obtenerPorId = async (req, res) => {
         if (!contenido) {
             return res.status(404).json({ error: 'Contenido no encontrado.' });
         }
-        res.json(formateadorResponse(contenido));
+
+        res.status(200).json(formateadorObjeto(contenido));
     } catch (error) {
-        res.status(500).json({ error: 'Error al obtener el contenido.' });
+        res.status(500).json({ error: 'Error al obtener el contenido.', details: error.message });
     }
 };
 
@@ -122,15 +124,15 @@ const eliminarContenido = async(req,res)=>{
             const contenido = await Contenido.findByPk(id);
             if(!contenido) res.status(404).json({msg:'Contenido no encontrado'});
             contenido.destroy();
-            res.status(204).send();
+            res.status(204).json({msg:'Contenido eliminado exitosamente'});
         }
     }catch(err){
         res.status(500).json({msg:err.message})
     }
 }
 
-// Agregar película
-const agregarPelicula = async (req, res) => {
+// Agregar contenido
+const agregarContenido = async (req, res) => {
     try {
         const {
             titulo,
@@ -144,7 +146,7 @@ const agregarPelicula = async (req, res) => {
         } = req.body;
 
         // Asegúrate de que todos los campos necesarios están presentes
-        if (!titulo || !poster || !categoria || !genero || !resumen || !duracion || !trailer || !temporadas) {
+        if (!titulo || !poster || !categoria || !genero || !resumen || !trailer) {
             return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
         }
 
@@ -154,8 +156,8 @@ const agregarPelicula = async (req, res) => {
             categoria,
             genero,
             resumen,
-            temporadas,
-            duracion,
+            temporadas:  temporadas !== undefined ? temporadas : null,
+            duracion: duracion !== undefined ? duracion : null,
             trailer
         });
         res.status(201).json(contenidoNuevo);
@@ -189,7 +191,7 @@ module.exports = {
     obtenerContenidos, 
     obtenerPorId, 
     filtrarContenido, 
-    // eliminarContenido, 
-    agregarPelicula,
+    eliminarContenido, 
+    agregarContenido,
     // actualizarContenido
 };
