@@ -4,11 +4,11 @@ GET http://localhost:8080/contenidos
 ### Filtrar contenido por id
 GET http://localhost:8080/contenidos/1
 
-## Filtrar contenido por categoria
-GET http://localhost:8080/contenidos/
+### Filtrar contenido por categoria
+GET http://localhost:8080/contenidos/query?categoria=pelicula
 
 ### Filtrar contenido por titulo, genero o categoria 
-GET http://localhost:8080/contenidos/q?genero=1
+GET http://localhost:8080/contenidos/query?genero=Drama
 
 ### Agregar pelicula
 POST http://localhost:8080/contenidos/
@@ -16,19 +16,19 @@ Content-Type:application/json
 {
     "titulo":"Guasón",
     "poster":"./posters/7.jpg",
-    "categoria":1,
-    "genero":3,
+    "categoria":1, // id de la categoria Pelicula
+    "genero":3, // id del genero Ciencia Ficcion
     "resumen":"Arthur Fleck (Phoenix) es un hombre ignorado por la sociedad, cuya motivación en la vida es hacer reír. Pero una Serie de trágicos acontecimientos le llevarán a ver el mundo de otra forma. Película basada en el popular personaje de DC Comics Joker, conocido como archivillano de Batman, pero que en este film tomará un cariz más realista y oscuro.", 
     "duracion":121,
     "trailer":"https://www.youtube.com/embed/zAGVQLHvwOY"
 } 
 
 ### Eliminar contenidos
-DELETE http://localhost:8080/contenidos/eliminar/5
+DELETE http://localhost:8080/contenidos/eliminar/100
 
 ### Actualizar de contenidos parcial o completa
-PATCH http://localhost:8080/contenidos/update/2
+PATCH http://localhost:8080/contenidos/actualizar/26
 Content-Type: application/json
 {
-    "duracion":"120 minutos"
+    "genero":10
 }

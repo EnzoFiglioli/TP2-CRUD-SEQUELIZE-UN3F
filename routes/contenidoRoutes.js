@@ -6,7 +6,7 @@ const {
     filtrarContenido, 
     agregarContenido,
     eliminarContenido,
-    // actualizarContenido,
+    actualizarContenido,
 } = require('../controllers/contenidosController.js');
 
 /**
@@ -43,7 +43,7 @@ router.get('/', obtenerContenidos);
  *               items:
  *                 $ref: '#/components/schemas/Contenido'
  */
-router.get("/query", filtrarContenido);
+router.get('/query', filtrarContenido);
 
 /**
  * @swagger
@@ -89,11 +89,12 @@ router.get('/:id', obtenerPorId);
  *         description: Error en la solicitud.
  */
 router.post('/', agregarContenido);
+
 /**
  * @swagger
  * /contenidos/eliminar/{id}:
  *   delete:
- *     summary: eliminar un contenido
+ *     summary: Eliminar un contenido
  *     description: Endpoint para eliminar un contenido de nuestra base de datos.
  *     parameters:
  *       - in: path
@@ -108,6 +109,33 @@ router.post('/', agregarContenido);
  *       400:
  *         description: Error en la solicitud.
  */
-router.delete('/eliminar/:id',eliminarContenido);
-// router.patch('/actualizar/:id')
+router.delete('/eliminar/:id', eliminarContenido);
+
+/**
+ * @swagger
+ * /contenidos/actualizar/{id}:
+ *   patch:
+ *     summary: Actualizar un contenido
+ *     description: Endpoint para actualizar un contenido en la base de datos.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID del contenido
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Contenido'
+ *     responses:
+ *       201:
+ *         description: Contenido actualizado exitosamente.
+ *       400:
+ *         description: Error en la solicitud.
+ */
+router.patch('/actualizar/:id', actualizarContenido);
+
 module.exports = router;

@@ -167,24 +167,24 @@ const agregarContenido = async (req, res) => {
 }
 
 // Actualizacion de contenidos
-// const actualizarContenido = async (req, res) => {
-//     try {
-//         const { id } = req.params; 
-//         const datosActualizados = req.body;
+const actualizarContenido = async (req, res) => {
+    try {
+        const { id } = req.params; 
+        const datosActualizados = req.body;
 
-//         const contenido = await Contenido.findByPk(id);
+        const contenido = await Contenido.findByPk(id);
         
-//         if (!contenido) {
-//             return res.status(404).json({ msg: 'Contenido no encontrado.' });
-//         }
+        if (!contenido) {
+            return res.status(404).json({ msg: 'Contenido no encontrado.' });
+        }
 
-//         await contenido.update(datosActualizados);
+        await contenido.update(datosActualizados);
 
-//         res.status(200).json({ msg: 'Contenido actualizado correctamente.', contenido });
-//     } catch (error) {
-//         res.status(500).json({ msg: 'Error al actualizar el contenido.', error: error.message });
-//     }
-// };
+        res.status(200).json({ msg: 'Contenido actualizado correctamente.', contenido });
+    } catch (error) {
+        res.status(500).json({ msg: 'Error al actualizar el contenido.', error: error.message });
+    }
+};
 
 
 module.exports = { 
@@ -193,5 +193,5 @@ module.exports = {
     filtrarContenido, 
     eliminarContenido, 
     agregarContenido,
-    // actualizarContenido
+    actualizarContenido
 };
