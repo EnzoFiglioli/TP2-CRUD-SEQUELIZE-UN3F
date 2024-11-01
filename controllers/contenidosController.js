@@ -38,7 +38,7 @@ const filtrarContenido = async (req, res) => {
     const contenidos = await Contenido.findAll(filterOptions);
 
     if (contenidos.length > 0) {
-        return res.json(formateadorResponse(contenidos)); 
+        return res.json(formateadorResponse(contenidos));
     } else {
         return res.status(404).json({ msg: 'No se encontraron resultados con esos filtros.' });
     }
