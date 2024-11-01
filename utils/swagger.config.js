@@ -71,7 +71,7 @@ const swaggerOptions = {
                         id_contenido: {
                             type: 'integer',
                             description: 'ID único del contenido',
-                            example: 1,
+                            example: 100,
                         },
                         poster: {
                             type: 'string',
@@ -104,9 +104,9 @@ const swaggerOptions = {
                             example: 'null',
                         },
                         duracion: {
-                            type: 'string',
+                            type: 'integer',
                             description: 'Duración del contenido (para películas)',
-                            example: '126 minutos',
+                            example: 126
                         },
                         trailer: {
                             type: 'string',
