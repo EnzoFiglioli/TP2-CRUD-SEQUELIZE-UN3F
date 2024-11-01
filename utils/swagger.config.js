@@ -12,6 +12,7 @@ const swaggerOptions = {
         servers: [
             {
                 url: 'http://localhost:8080',
+                url: 'https://tp2-crud-sequelize-un3f-production.up.railway.app/'
             },
         ],
         components: {
