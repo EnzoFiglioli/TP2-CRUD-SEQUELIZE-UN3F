@@ -7,7 +7,7 @@ const swaggerOptions = {
         info: {
             title: 'Trabajo práctico integrado n°2 - CRUD con Sequelize',
             version: '1.0.0',
-            description: 'API de películas y series desarrollada con Sequelize para el trabajo practico integrador n°2 de la diplomatura desarrollador web backend.',
+            description:"API de películas y series desarrollada con Sequelize para el trabajo práctico integrador n°2de la diplomatura desarrollador web backend.",
         },
         servers: [
             {
@@ -81,7 +81,7 @@ const swaggerOptions = {
                         titulo: {
                             type: 'string',
                             description: 'Título del contenido',
-                            example: 'Her',
+                            example: 'Memento',
                         },
                         categoria: {
                             type: 'integer',
@@ -91,7 +91,7 @@ const swaggerOptions = {
                         genero: {
                             type: 'integer',
                             description: 'ID del género asociado',
-                            example: 3,
+                            example: 2,
                         },
                         resumen: {
                             type: 'string',
@@ -114,7 +114,7 @@ const swaggerOptions = {
                             example: 'https://www.youtube.com/embed/UVMcpZ42BkA',
                         },
                     },
-                    required: ['id_contenido', 'poster', 'titulo', 'categoria', 'resumen', 'trailer'],
+                    required: ['poster', 'titulo', 'categoria', 'resumen', 'trailer'],
                 },
                 ContenidoActores: {
                     type: 'object',
