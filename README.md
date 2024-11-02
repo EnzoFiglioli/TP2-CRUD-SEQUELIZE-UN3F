@@ -14,11 +14,10 @@
 4. **Abrir el proyecto** en tu IDE de preferencia.
 5. **Instalar las dependencias** necesarias ejecutando el siguiente comando en la terminal:
    ```bash
-   pnpm install
-(O `npm install` si estás usando npm)
+   npm install
 6. **Ejecutar el servidor** con el comando:
    ```bash
-   node ./app.js
+   npm run start
 ```
 ## Notas adicionales:
 - Asegúrate de tener la base de datos en funcionamiento antes de iniciar el servidor.
