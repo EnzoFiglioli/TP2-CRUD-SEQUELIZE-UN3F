@@ -137,5 +137,8 @@ router.delete('/eliminar/:id', eliminarContenido);
  *         description: Error en la solicitud.
  */
 router.patch('/actualizar/:id', actualizarContenido);
+router.use((req,res)=>{
+    res.status(404).json({ error: 'Contenido no encontrado' });
+});
 
 module.exports = router;
