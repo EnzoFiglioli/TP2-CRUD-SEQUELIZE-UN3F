@@ -96,7 +96,7 @@ const swaggerOptions = {
                         resumen: {
                             type: 'string',
                             description: 'Resumen o sinopsis del contenido',
-                            example: 'En un futuro cercano, Theodore, un hombre solitario a punto de divorciarse que trabaja en una empresa como escritor de cartas para terceras personas, compra un día un nuevo sistema operativo basado en el modelo de Inteligencia Artificial, diseñado para satisfacer todas las necesidades del usuario. Para su sorpresa, se crea una relación romántica entre él y Samantha, la voz femenina de ese sistema operativo.',
+                            example: "Leonard Shelby es un hombre con pérdida de memoria a corto plazo, lo que le dificulta recordar eventos recientes. Armado con un sistema de fotos Polaroid y tatuajes, está decidido a encontrar al asesino de su esposa, mientras navega por una realidad fragmentada y confusa.",
                         },
                         temporadas: {
                             type: 'integer',
@@ -111,7 +111,7 @@ const swaggerOptions = {
                         trailer: {
                             type: 'string',
                             description: 'URL del tráiler del contenido',
-                            example: 'https://www.youtube.com/embed/UVMcpZ42BkA',
+                            example: "https://www.youtube.com/embed/0vS0E9bBSL0",
                         },
                     },
                     required: ['poster', 'titulo', 'categoria', 'resumen', 'trailer'],
