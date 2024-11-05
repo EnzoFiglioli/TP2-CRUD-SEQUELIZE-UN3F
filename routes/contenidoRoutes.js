@@ -26,13 +26,19 @@ const {
  *                 $ref: '#/components/schemas/Contenido'
  */
 router.get('/', obtenerContenidos);
-
 /**
  * @swagger
  * /contenidos/query:
  *   get:
- *     summary: Filtrar contenidos
- *     description: Endpoint para filtrar contenidos según parámetros específicos.
+ *     summary: Filtrar contenidos por género
+ *     description: Endpoint para filtrar contenidos según el género especificado.
+ *     parameters:
+ *       - in: query
+ *         name: genero
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Género del contenido a filtrar
  *     responses:
  *       200:
  *         description: Respuesta exitosa con los contenidos filtrados.
