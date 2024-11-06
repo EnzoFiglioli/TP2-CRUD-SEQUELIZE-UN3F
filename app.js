@@ -17,12 +17,7 @@ app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(dbConnection);
-const corsOptions = {
-    origin: "*",
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-    allowedHeaders: ['Content-Type', 'Authorization'], 
-}
-app.use(cors(corsOptions));
+app.use(cors());
 
 //Rutas
 app.use("/",homeRoute);

@@ -14,11 +14,11 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: `http://localhost:${port}`
-            },
-            {
                 url: 'https://tp2-crud-sequelize-un3f-production.up.railway.app/'
             },
+            {
+                url: `http://localhost:${port}`
+            }
         ],
         components: {
             schemas: {
