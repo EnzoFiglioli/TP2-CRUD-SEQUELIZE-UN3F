@@ -18,10 +18,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(dbConnection);
 const corsOptions = {
-    origin: [
-        `http://localhost:${port}`,
-        'https://tp2-crud-sequelize-un3f-production.up.railway.app'
-    ],
+    origin: "*",
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     allowedHeaders: ['Content-Type', 'Authorization'], 
 }
@@ -39,5 +36,5 @@ app.listen(port, () => {
     console.log(`Server running on port ${port}`);
     console.log(`Docuentación de la API en http://localhost:${port}/docs`)
 })
-
+console.log(ENV);
 module.exports = {express}

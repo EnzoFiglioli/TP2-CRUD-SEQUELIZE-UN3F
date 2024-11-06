@@ -1,6 +1,5 @@
 const ENV = process.env.NODE_ENV || 'local';
 require("dotenv").config({path:`.env.${ENV}`});
-console.log(ENV);
 const port = process.env.APP_ENV || 8080;
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");

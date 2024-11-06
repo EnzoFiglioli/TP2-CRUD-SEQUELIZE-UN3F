@@ -8,6 +8,15 @@ const {DATABASE, DBUSER, PASSWORD, HOST} = process.env;
 const sequelize = new Sequelize(DATABASE,DBUSER,PASSWORD,{
     host:HOST,
     dialect:'mysql',
-    port: process.env.PORT || 3306
+    port: process.env.PORT || 3306,
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    },
+    dialectOptions: {
+        connectTimeout: 60000
+    }
 });
 module.exports = {sequelize}
