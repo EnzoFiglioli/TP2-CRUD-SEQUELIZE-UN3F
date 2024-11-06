@@ -7,6 +7,7 @@ const port = process.env.PORT || 3000;
 const {dbConnection} = require("./middlewares/dbMiddleware.js");
 const contenidosRoutes = require("./routes/contenidoRoutes.js");
 const actoresRoutes = require("./routes/actoresRouter.js")
+const homeRoute = require("./routes/homeRoute.js");
 const {swaggerDocs,swaggerUI} = require("./utils/swagger.config.js");
 
 // Middlewares
@@ -16,12 +17,7 @@ app.use(morgan('dev'));
 app.use(dbConnection);
 
 //Rutas
-app.get("/",(req,res)=>{
-    res.json({
-        home:"Bienvenidos a trailerflix📽️🎬🍿",
-        routes:`/contenidos \n/actores \n/docs`
-    });
-});
+app.use("/",homeRoute);
 app.use("/contenidos", contenidosRoutes);
 app.use("/actores",actoresRoutes);
 app.use((req,res)=>{
