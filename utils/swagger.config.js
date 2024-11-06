@@ -1,6 +1,3 @@
-const ENV = process.env.NODE_ENV || 'local';
-require("dotenv").config({path:`.env.${ENV}`});
-const port = process.env.APP_ENV || 8080;
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 
@@ -17,7 +14,7 @@ const swaggerOptions = {
                 url: 'https://tp2-crud-sequelize-un3f-production.up.railway.app/'
             },
             {
-                url: `http://localhost:${port}`
+                url: `http://localhost:8080`
             }
         ],
         components: {
@@ -150,7 +147,7 @@ const swaggerOptions = {
             },
         },
     },
-    apis: ['./routes/contenidoRoutes.js'], 
+    apis: ['./routes/contenidoRoutes.js','./routes/actoresRouter.js'], 
 };
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
