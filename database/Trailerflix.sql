@@ -20,6 +20,7 @@
 --
 
 CREATE DATABASE IF NOT EXISTS trailerflix DEFAULT CHARACTER  SET 'utf8'; 
+USE trailerflix;
 
 DROP TABLE IF EXISTS `actores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
