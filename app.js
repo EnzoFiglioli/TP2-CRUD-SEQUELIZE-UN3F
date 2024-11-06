@@ -4,9 +4,10 @@ const app = express();
 const morgan = require('morgan');
 const port = process.env.PORT || 3000;
 
-const {dbConnection} = require("./middlewares/dbMiddleware.js")
+const {dbConnection} = require("./middlewares/dbMiddleware.js");
 const contenidosRoutes = require("./routes/contenidoRoutes.js");
-const {swaggerDocs,swaggerUI} = require("./utils/swagger.config.js")
+const actoresRoutes = require("./routes/actoresRouter.js")
+const {swaggerDocs,swaggerUI} = require("./utils/swagger.config.js");
 
 // Middlewares
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
@@ -15,7 +16,14 @@ app.use(morgan('dev'));
 app.use(dbConnection);
 
 //Rutas
+app.get("/",(req,res)=>{
+    res.json({
+        home:"Bienvenidos a trailerflix📽️🎬🍿",
+        routes:`/contenidos \n/actores \n/docs`
+    });
+});
 app.use("/contenidos", contenidosRoutes);
+app.use("/actores",actoresRoutes);
 app.use((req,res)=>{
     res.status(404).json({ error: 'Ruta no encontrada' });
 });
@@ -23,7 +31,6 @@ app.use((req,res)=>{
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
     console.log(`Docuentación de la API en http://localhost:${port}/docs`)
-    console.log(new Date());
 })
 
-module.exports = {port}
+module.exports = {port, express}
