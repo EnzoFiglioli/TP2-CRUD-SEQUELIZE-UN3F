@@ -168,7 +168,7 @@ const agregarContenido = async (req, res) => {
                 id_actor
             }));
 
-            // Insertar todas las asociaciones
+            // Inserta todas las asociaciones
             await ContenidoActores.bulkCreate(contenidoReparto);
         }
 

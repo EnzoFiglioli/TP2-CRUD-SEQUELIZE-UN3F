@@ -1,7 +1,7 @@
 # TrailerFlix: Trabajo Integrador
 
 ## Modelo UML del sistema:
-![UML](./utils/trailerflix_1.png)
+![UML](./database/trailerflix_1.png)
 
 ## Pasos para usar la API:
 
