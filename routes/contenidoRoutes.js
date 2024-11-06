@@ -37,8 +37,17 @@ router.get('/', obtenerContenidos);
  *         name: genero
  *         schema:
  *           type: string
- *         required: true
  *         description: Género del contenido a filtrar
+ *       - in: query
+ *         name: categoria
+ *         schema:
+ *           type: string
+ *         description: Categoria del contenido a filtrar
+ *       - in: query
+ *         name: titulo
+ *         schema:
+ *           type: string
+ *         description: Titulo del contenido a filtrar
  *     responses:
  *       200:
  *         description: Respuesta exitosa con los contenidos filtrados.
