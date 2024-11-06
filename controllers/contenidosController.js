@@ -169,7 +169,7 @@ const agregarContenido = async (req, res) => {
             }));
 
             // Insertar todas las asociaciones
-            await ContenidoActores.bulkCreate(asociacionesReparto);
+            await ContenidoActores.bulkCreate(contenidoReparto);
         }
 
         res.status(201).json({
