@@ -1,7 +1,6 @@
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
-const { port } = require("../app.js")
-
+const port = process.env.APP_ENV || 3000;
 const swaggerOptions = {
     definition: {
         openapi: '3.0.0',

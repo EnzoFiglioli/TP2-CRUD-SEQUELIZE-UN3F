@@ -1,4 +1,5 @@
-require("dotenv").config();
+const ENV = process.env.NODE_ENV || 'local';
+require("dotenv").config({path:`.env.${ENV}`});
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
@@ -29,4 +30,4 @@ app.listen(port, () => {
     console.log(`Docuentación de la API en http://localhost:${port}/docs`)
 })
 
-module.exports = {port, express}
+module.exports = {express}

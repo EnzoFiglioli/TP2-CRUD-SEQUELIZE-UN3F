@@ -4,7 +4,7 @@ const { Actor } = require("../models/actor");
 const { ContenidoActores } = require("../models/contenidoActores");
 const { Categoria } = require("../models/categoria.js")
 const { Op } = require("sequelize");
-const {formateadorResponse, formateadorObjeto} = require("../handlers/formateador.js")
+const {formateadorResponse, formateadorObjeto} = require("../handlers/formateador.js");
 
 // Filtrar contenido
 const filtrarContenido = async (req, res) => {
