@@ -143,36 +143,44 @@ const agregarContenido = async (req, res) => {
             temporadas,
             duracion,
             trailer,
-            reparto
+            reparto 
         } = req.body;
 
-        // Asegúrate de que todos los campos necesarios están presentes
         if (!titulo || !poster || !categoria || !genero || !resumen || !trailer) {
             return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
         }
 
+        // Crear el nuevo contenido
         const contenidoNuevo = await Contenido.create({
             titulo,
             poster,
             categoria,
             genero,
             resumen,
-            temporadas:  temporadas !== undefined ? temporadas : null,
-            duracion: duracion !== undefined ? duracion : null,
+            temporadas,
+            duracion,
             trailer
         });
-        const repartoNuevo = await ContenidoActores.create({
-            id_contenido: contenidoNuevo.id_contenido,
-            id_actor: reparto
-        })
+
+        if (Array.isArray(reparto) && reparto.length > 0) {
+            const contenidoReparto = reparto.map(id_actor => ({
+                id_contenido: contenidoNuevo.id_contenido,
+                id_actor
+            }));
+
+            // Insertar todas las asociaciones
+            await ContenidoActores.bulkCreate(asociacionesReparto);
+        }
+
         res.status(201).json({
-            contenido:contenidoNuevo,
-            reparto:repartoNuevo
+            contenido: contenidoNuevo,
+            reparto: reparto 
         });
     } catch (error) {
-        res.status(500).json({ error: `Ocurrió un error`, message: `error: ${error.message}` });
+        res.status(500).json({ error: `Ocurrió un error`, message: error.message });
     }
-}
+};
+
 
 // Actualizacion de contenidos
 const actualizarContenido = async (req, res) => {
