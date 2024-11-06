@@ -4,7 +4,7 @@ const {crearActor} = require("../controllers/actoresController.js")
 
 /**
  * @swagger
- * /crear:
+ * /actores/crear:
  *   post:
  *     summary: Crea un nuevo actor
  *     description: Endpoint para crear un nuevo actor en la base de datos.

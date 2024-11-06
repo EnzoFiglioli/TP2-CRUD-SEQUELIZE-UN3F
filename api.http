@@ -1,5 +1,5 @@
 ### Home
-GET http://localhost:3000/
+GET http://localhost:8080/
 
 ### Todas las peliculas y series
 GET http://localhost:8080/contenidos
@@ -38,6 +38,8 @@ Content-Type: application/json
 }
 ### Crear Actor
 POST http://localhost:8080/actores/crear
+Content-Type: application/json
+
 {
     "nombre_actor":"Rodrigo de la serna"
 }

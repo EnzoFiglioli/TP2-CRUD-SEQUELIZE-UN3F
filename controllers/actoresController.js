@@ -1,9 +1,9 @@
-const Actor = require('../models/actor');
+const {Actor} = require('../models/actor.js');
 const crearActor = async(req,res)=> {
     try{
         const {nombre_actor} = req.body;
-        const existe = await Actor.findOne({where:{nombre_actor}})
-        if(existe) return res.status(400).json({msg:"El actor ya existe"}); // busca si ya existe un actor con ese nombre
+        const existe = await Actor.findOne({ where:{ nombre_actor} });
+        if(existe) return res.status(400).json({msg:'El actor ya existe,prueba otro'});
         const actor = await Actor.create({
             nombre_actor
         });
