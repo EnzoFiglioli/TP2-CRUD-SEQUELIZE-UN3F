@@ -1,5 +1,6 @@
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
+const { port } = require("../app.js")
 
 const swaggerOptions = {
     definition: {
@@ -11,7 +12,7 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: 'http://localhost:8080',
+                url: `http://localhost:${port}`,
                 url: 'https://tp2-crud-sequelize-un3f-production.up.railway.app/'
             },
         ],
@@ -113,6 +114,11 @@ const swaggerOptions = {
                             description: 'URL del tráiler del contenido',
                             example: "https://www.youtube.com/embed/0vS0E9bBSL0",
                         },
+                        reparto: {
+                            type: 'array',
+                            description: 'Array de IDs de actores asociados',
+                            example: '[1, 2, 3]'
+                        }
                     },
                     required: ['poster', 'titulo', 'categoria', 'resumen', 'trailer'],
                 },

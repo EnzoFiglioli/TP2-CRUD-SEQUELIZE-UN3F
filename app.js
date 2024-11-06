@@ -25,3 +25,5 @@ app.listen(port, () => {
     console.log(`Docuentación de la API en http://localhost:${port}/docs`)
     console.log(new Date());
 })
+
+module.exports = {port}

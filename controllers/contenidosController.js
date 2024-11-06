@@ -142,7 +142,8 @@ const agregarContenido = async (req, res) => {
             resumen,
             temporadas,
             duracion,
-            trailer
+            trailer,
+            reparto
         } = req.body;
 
         // Asegúrate de que todos los campos necesarios están presentes
@@ -160,7 +161,14 @@ const agregarContenido = async (req, res) => {
             duracion: duracion !== undefined ? duracion : null,
             trailer
         });
-        res.status(201).json(contenidoNuevo);
+        const repartoNuevo = await ContenidoActores.create({
+            id_contenido: contenidoNuevo.id_contenido,
+            id_actor: reparto
+        })
+        res.status(201).json({
+            contenido:contenidoNuevo,
+            reparto:repartoNuevo
+        });
     } catch (error) {
         res.status(500).json({ error: `Ocurrió un error`, message: `error: ${error.message}` });
     }
