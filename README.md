@@ -1,11 +1,11 @@
 # TrailerFlix: Trabajo Integrador
 
-## Modelo UML del sistema:
-![UML](./database/trailerflix_1.png)
+## Modelo EMR:
+![EMR](./database/trailerflix_1.png)
 
 ## Pasos para usar la API:
 
-1. **Descargar de la carpet `/utils` el archivo `Trailerflix.sql` del repositorio.**
+1. **Descargar de la carpeta `/database` el archivo `Trailerflix.sql` del repositorio.**
 2. **Abrir MySQL Workbench** y ejecutar las cláusulas del archivo `Trailerflix.sql` para crear y poblar la base de datos.
 3. **Clonar el repositorio** en tu computadora local usando el comando:
    ```bash
