@@ -131,14 +131,14 @@ router.delete('/eliminar/:id', eliminarContenido);
  * /contenidos/actualizar/{id}:
  *   patch:
  *     summary: Actualizar un contenido
- *     description: Endpoint para actualizar un contenido en la base de datos.
+ *     description: Actualiza los datos de un contenido en la base de datos según el ID especificado.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID del contenido
+ *         description: ID del contenido que se desea actualizar.
  *     requestBody:
  *       required: true
  *       content:
@@ -146,10 +146,24 @@ router.delete('/eliminar/:id', eliminarContenido);
  *           schema:
  *             $ref: '#/components/schemas/Contenido'
  *     responses:
- *       201:
+ *       200:
  *         description: Contenido actualizado exitosamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   example: Contenido actualizado correctamente.
+ *                 contenido:
+ *                   $ref: '#/components/schemas/Contenido'
  *       400:
- *         description: Error en la solicitud.
+ *         description: Solicitud incorrecta, datos inválidos.
+ *       404:
+ *         description: Contenido no encontrado.
+ *       500:
+ *         description: Error interno del servidor.
  */
 router.patch('/actualizar/:id', actualizarContenido);
 router.use((req,res)=>{
