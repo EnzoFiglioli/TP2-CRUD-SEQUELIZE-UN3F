@@ -3,6 +3,8 @@
 ## Modelo EMR:
 ![EMR](./database/trailerflix_1.png)
 
+<h4>Documentacion del sitio desplegado en Railway 👉<a href="https://tp2-crud-sequelize-un3f-production.up.railway.app/docs/" target="_blank">aquí</a>👈</h4> 
+
 ## Pasos para usar la API:
 
 1. **Descargar de la carpeta `/database` el archivo `Trailerflix.sql` del repositorio.**
